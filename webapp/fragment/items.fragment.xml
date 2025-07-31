@@ -1,0 +1,83 @@
+<core:FragmentDefinition xmlns:tnt="sap.tnt" xmlns:cards="sap.f.cards" xmlns:form="sap.ui.layout.form" xmlns:m="sap.m" xmlns:core="sap.ui.core"     xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:smarttable="sap.ui.comp.smarttable"
+>   
+ <smarttable:SmartTable 
+                id="idLegacyCorreSmartTable"
+                entitySet="LegacyCorresp"
+                tableBindingPath="LegacyCorrespModel>/LegacyCorresp"
+                tableType="ResponsiveTable"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="Records"
+                showRowCount="true"
+                enableAutoBinding="true"
+                enableExport="false"
+                demandPopin="true"
+                requestAtLeastFields="vkont,letter_name,letter_type,partner,due_date,netamount,netamount_F"
+            >
+            <Table id="tblLegacyCorrespTable"
+                ariaLabelledBy="title"
+                rows="{LegacyCorrespModel>/LegacyCorresp}" 
+                enableSelectAll="false"
+                selectionMode="None" 
+                selectionBehavior="RowSelector"           
+                enableColumnFreeze="true">                
+                <columns>                    
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Contract Account" textAlign="Center" width="100%"/>
+                        <template>
+                              <m:Text textAlign="Center" text="{LegacyCorrespModel>vkont}"/>                            
+                        </template>
+                    </Column>  
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Letter Name" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>letter_name}"/>
+                        </template>
+                    </Column>                      
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Letter Type" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>letter_type}" />
+                        </template>
+                    </Column>   
+                     <Column
+                       width="13rem" hAlign="Center">
+                        <m:Label text="Business Partner" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>partner}"/>
+                        </template>
+                    </Column>   
+                    <Column
+                       width="13rem" hAlign="Center">
+                        <m:Label text="Due Date" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>due_date}"/>
+                        </template>
+                    </Column>  
+                    <Column
+                       width="13rem" hAlign="Center">
+                        <m:Label text="Net Amount" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>netamount}"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem">
+                        <m:Label text="Final Net Amount" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>netamount_F}"/>
+                        </template>
+                    </Column>   
+                </columns>
+        </Table> 
+        </smarttable:SmartTable>
+</core:FragmentDefinition>

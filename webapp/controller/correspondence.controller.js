@@ -19,6 +19,9 @@ sap.ui.define([
                 LegacyCorresp: []
             });
             oController.getView().setModel(oLegacyCorrespModel, "LegacyCorrespModel");
+            // if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getRenderer("fiori2")) {
+            //     sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
+            // }
             oRouter.getRoute("Routecorrespondence").attachPatternMatched(oController._onRouteMatch, oController);
         },
         _onRouteMatch: function (oEvent) {

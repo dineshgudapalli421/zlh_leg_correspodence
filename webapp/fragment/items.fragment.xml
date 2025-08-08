@@ -39,7 +39,8 @@
                         width="13rem" hAlign="Center">
                         <m:Label text="Letter Name" textAlign="Center" width="100%"/>
                         <template>
-                            <m:Text textAlign="Center" text="{LegacyCorrespModel>letter_name}"/>
+                            <!-- <m:Text textAlign="Center" text="{LegacyCorrespModel>letter_name}"/> -->
+                            <m:Link text="{LegacyCorrespModel>letter_name}" press="handleLinkPress" textAlign="Center"/>
                         </template>
                     </Column>                      
                     <Column

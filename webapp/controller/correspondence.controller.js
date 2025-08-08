@@ -16,6 +16,7 @@ sap.ui.define([
             UIComponent = oController.getOwnerComponent();
             oRouter = UIComponent.getRouter();
             var oLegacyCorrespModel = new JSONModel({
+                oLetterNamePdf: "",
                 LegacyCorresp: []
             });
             oController.getView().setModel(oLegacyCorrespModel, "LegacyCorrespModel");
@@ -100,6 +101,23 @@ sap.ui.define([
             });
 
 
-        }
+        },
+        handleLinkPress: function (oEvent) {
+            debugger;
+            let oSourceValue = oEvent.getSource();
+            let oLetterName = oSourceValue.getText();
+            if (oLetterName) {
+                var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oLetterName + "')/$value";
+                this.getView().getModel("LegacyCorrespModel").setProperty("/oLetterNamePdf", oSource);
+                if (!this.oPdfDialog) {
+                    this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhlegcorrespodence.fragment.letterNamePDF", this);
+                    this.getView().addDependent(this.oPdfDialog);
+                }
+                this.oPdfDialog.open();
+            }
+        },
+        onCloseDialogPDF: function () {
+            this.oPdfDialog.close();
+        },
     });
 });

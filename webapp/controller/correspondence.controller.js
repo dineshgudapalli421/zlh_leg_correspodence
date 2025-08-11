@@ -5,8 +5,9 @@ sap.ui.define([
     'sap/ui/model/FilterOperator',
     "sap/ui/model/json/JSONModel",
     'sap/m/MessageBox',
-    "sap/ui/core/Fragment"
-], (Controller, ODataModel, Filter, FilterOperator, JSONModel, MessageBox, Fragment) => {
+    "sap/ui/core/Fragment",
+    "sap/m/PDFViewer"
+], (Controller, ODataModel, Filter, FilterOperator, JSONModel, MessageBox, Fragment, PDFViewer) => {
     "use strict";
     var oRouter, oController, UIComponent
     return Controller.extend("com.sap.lh.mr.zlhlegcorrespodence.controller.correspondence", {
@@ -23,6 +24,8 @@ sap.ui.define([
             // if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getRenderer("fiori2")) {
             //     sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
             // }
+            // oController._pdfViewer = new PDFViewer();
+            // oController.getView().addDependent(oController._pdfViewer);
             oRouter.getRoute("Routecorrespondence").attachPatternMatched(oController._onRouteMatch, oController);
         },
         _onRouteMatch: function (oEvent) {
@@ -106,18 +109,30 @@ sap.ui.define([
             debugger;
             let oSourceValue = oEvent.getSource();
             let oLetterName = oSourceValue.getText();
+            oController._letterName = oLetterName;
+            var oPDFModel = oController.getOwnerComponent().getModel();
             if (oLetterName) {
+                var oPdfViewer = oController.getView().byId("idPdfViewer");
                 var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oLetterName + "')/$value";
-                this.getView().getModel("LegacyCorrespModel").setProperty("/oLetterNamePdf", oSource);
-                if (!this.oPdfDialog) {
-                    this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhlegcorrespodence.fragment.letterNamePDF", this);
-                    this.getView().addDependent(this.oPdfDialog);
-                }
-                this.oPdfDialog.open();
+                // this.getView().getModel("LegacyCorrespModel").setProperty("/oLetterNamePdf", oSource);
+                // if (!this.oPdfDialog) {
+                //     this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhlegcorrespodence.fragment.letterNamePDF", this);
+                //     this.getView().addDependent(this.oPdfDialog);
+                // }
+                // this.oPdfDialog.open();
+
+                // var sPath = "/Print_previewSet('" + oLetterName + "')/$value";
+                var oPdfViewer = new PDFViewer({
+                    title: "Letter PDF",
+                    height: "600px"
+                });
+                oPdfViewer.setSource(oSource);
+                oPdfViewer.open();                
             }
         },
+
         onCloseDialogPDF: function () {
             this.oPdfDialog.close();
-        },
+        }        
     });
 });

@@ -18,7 +18,7 @@
                 enableAutoBinding="true"
                 enableExport="false"
                 demandPopin="true"
-                requestAtLeastFields="vkont,letter_name,letter_type,partner,due_date,netamount,netamount_F"
+                requestAtLeastFields="letter_name,letter_type,vertrag,partner,due_date,netamount,netamount_F,created_on,created_by"
             >
             <Table id="tblLegacyCorrespTable"
                 ariaLabelledBy="title"
@@ -28,13 +28,13 @@
                 selectionBehavior="RowSelector"           
                 enableColumnFreeze="true">                
                 <columns>                    
-                    <Column
+                    <!-- <Column
                         width="13rem" hAlign="Center">
                         <m:Label text="Contract Account" textAlign="Center" width="100%"/>
                         <template>
                               <m:Text textAlign="Center" text="{LegacyCorrespModel>vkont}"/>                            
                         </template>
-                    </Column>  
+                    </Column>   -->
                     <Column
                         width="13rem" hAlign="Center">
                         <m:Label text="Letter Name" textAlign="Center" width="100%"/>
@@ -50,6 +50,13 @@
                             <m:Text textAlign="Center" text="{LegacyCorrespModel>letter_type}" />
                         </template>
                     </Column>   
+                    <Column
+                        width="13rem" hAlign="Center">
+                        <m:Label text="Contract" textAlign="Center" width="100%"/>
+                        <template>
+                              <m:Text textAlign="Center" text="{LegacyCorrespModel>vertrag}"/>                            
+                        </template>
+                    </Column>  
                      <Column
                        width="13rem" hAlign="Center">
                         <m:Label text="Business Partner" textAlign="Center" width="100%"/>
@@ -72,10 +79,24 @@
                         </template>
                     </Column>
                     <Column
-                        width="11rem">
+                        width="11rem" hAlign="Center">
                         <m:Label text="Final Net Amount" textAlign="Center" width="100%"/>
                         <template>
                             <m:Text textAlign="Center" text="{LegacyCorrespModel>netamount_F}"/>
+                        </template>
+                    </Column>   
+                    <Column
+                        width="11rem" hAlign="Center">
+                        <m:Label text="Created On" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>created_on}"/>
+                        </template>
+                    </Column>   
+                    <Column
+                        width="11rem" hAlign="Center">
+                        <m:Label text="Created By" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text textAlign="Center" text="{LegacyCorrespModel>created_by}"/>
                         </template>
                     </Column>   
                 </columns>

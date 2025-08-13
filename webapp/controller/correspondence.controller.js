@@ -21,11 +21,9 @@ sap.ui.define([
                 LegacyCorresp: []
             });
             oController.getView().setModel(oLegacyCorrespModel, "LegacyCorrespModel");
-            // if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getRenderer("fiori2")) {
-            //     sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
-            // }
-            // oController._pdfViewer = new PDFViewer();
-            // oController.getView().addDependent(oController._pdfViewer);
+            if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getRenderer("fiori2")) {
+                sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
+            }            
             oRouter.getRoute("Routecorrespondence").attachPatternMatched(oController._onRouteMatch, oController);
         },
         _onRouteMatch: function (oEvent) {
@@ -112,18 +110,10 @@ sap.ui.define([
             oController._letterName = oLetterName;
             var oPDFModel = oController.getOwnerComponent().getModel();
             if (oLetterName) {
-                var oPdfViewer = oController.getView().byId("idPdfViewer");
-                var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oLetterName + "')/$value";
-                // this.getView().getModel("LegacyCorrespModel").setProperty("/oLetterNamePdf", oSource);
-                // if (!this.oPdfDialog) {
-                //     this.oPdfDialog = sap.ui.xmlfragment("com.sap.lh.mr.zlhlegcorrespodence.fragment.letterNamePDF", this);
-                //     this.getView().addDependent(this.oPdfDialog);
-                // }
-                // this.oPdfDialog.open();
-
-                // var sPath = "/Print_previewSet('" + oLetterName + "')/$value";
+                // var oPdfViewer = oController.getView().byId("idPdfViewer");
+                var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oLetterName + "')/$value";                
                 var oPdfViewer = new PDFViewer({
-                    title: "Letter PDF",
+                    title: "PDF Preview",
                     height: "600px"
                 });
                 oPdfViewer.setSource(oSource);

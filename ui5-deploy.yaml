@@ -20,6 +20,6 @@ builder:
           name: ZLH_LEG_CORRES
           description: Legacy Correspondance
           package: ZFIORI
-          transport: SDVK911335
+          transport: SDVK911619
         exclude:
           - /test/

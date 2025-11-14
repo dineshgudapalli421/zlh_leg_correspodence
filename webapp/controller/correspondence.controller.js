@@ -23,7 +23,7 @@ sap.ui.define([
             oController.getView().setModel(oLegacyCorrespModel, "LegacyCorrespModel");
             if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getRenderer("fiori2")) {
                 sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
-            }            
+            }
             oRouter.getRoute("Routecorrespondence").attachPatternMatched(oController._onRouteMatch, oController);
         },
         _onRouteMatch: function (oEvent) {
@@ -111,18 +111,20 @@ sap.ui.define([
             var oPDFModel = oController.getOwnerComponent().getModel();
             if (oLetterName) {
                 // var oPdfViewer = oController.getView().byId("idPdfViewer");
-                var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oLetterName + "')/$value";                
+                var oSource = "/sap/opu/odata/SAP/ZBI_PRINT_PREVIEW_SRV/Print_previewSet('" + oLetterName + "')/$value";
                 var oPdfViewer = new PDFViewer({
                     title: "PDF Preview",
                     height: "600px"
                 });
                 oPdfViewer.setSource(oSource);
-                oPdfViewer.open();                
+                var pdfUrl = oPdfViewer.getSource();
+                window.open(pdfUrl, "_blank");
+                //oPdfViewer.open();
             }
         },
 
         onCloseDialogPDF: function () {
             this.oPdfDialog.close();
-        }        
+        }
     });
 });
